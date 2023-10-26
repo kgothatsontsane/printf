@@ -1,74 +1,51 @@
 #include "main.h"
-#include <stdarg.h>
-#include <unistd.h>
 
 /**
  * _printf - Custom printf function
- * @format: The format string
- * @...: Variable number of arguments
- *
- * Return: Number of characters printed
+ * @format: The formatted string containing the text and format specifiers.
+ * Return: The number of characters printed.
  */
 int _printf(const char *format, ...)
 {
-    va_list args;
-    int printed_chars = 0;
+	int i, total = 0, count = 0;
+	int flags, width, precision, size, buffer_index = 0;
+	va_list a_list;
+	char buffer[BUFF_SIZE];
 
-    va_start(args, format);
+	if (format == NULL)
+		return (-1);
 
-    while (*format)
-    {
-        if (*format == '%')
-        {
-            format++; // Move past '%'
-            if (*format == 'c')
-            {
-                char c = va_arg(args, int);
-                printed_chars += write(1, &c, 1); // Write a character to stdout
-            }
-            else if (*format == 's')
-            {
-                char *s = va_arg(args, char *);
-                if (s)
-                    printed_chars += write(1, s, _strlen(s)); // Write a string to stdout
-                else
-                    printed_chars += write(1, "(null)", 6);
-            }
-            else if (*format == '%')
-            {
-                printed_chars += write(1, "%", 1); // Write a '%' character
-            }
-            else
-            {
-                printed_chars += write(1, "%", 1); // Handle unsupported format specifier as '%'
-                if (*format)
-                    printed_chars += write(1, format, 1);
-            }
-        }
-        else
-        {
-            printed_chars += write(1, format, 1); // Write regular characters
-        }
-        format++;
-    }
+	va_start(a_list, format);
 
-    va_end(args);
+	for (i = 0; format && format[i] != '\0'; i++)
+	{
+		if (format[i] != '%')
+		{
+			buffer[buffer_index++] = format[i];
+			if (buffer_index == BUFF_SIZE)
+				print_to_buffer(buffer, &buffer_index);
 
-    return printed_chars;
-}
+			count++;
+		}
+		else
+		{
+			print_to_buffer(buffer, &buffer_index);
+			flags = retrieve_flags(format, &i);
+			width = extract_width(format, &i, a_list);
+			precision = determine_precision(format, &i, a_list);
+			size = detect_size(format, &i);
+			++i;
+			total = print_handler(format, &i, a_list, buffer,
+					      flags, width, precision, size);
+			if (total == -1)
+				return (-1);
+			count += total;
+		}
+	}
 
-/**
- * _strlen - Calculate the length of a string
- * @s: The string
- *
- * Return: The length of the string
- */
-int _strlen(const char *s)
-{
-    int len = 0;
-    while (s[len])
-    {
-        len++;
-    }
-    return len;
+	print_to_buffer(buffer, &buffer_index);
+
+	va_end(a_list);
+
+	return (count);
 }
