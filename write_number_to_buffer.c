@@ -20,15 +20,15 @@ int write_number_to_buffer(int negative, int index, char buf[],
 
 	UNUSED(sz);
 
-	if ((flags & F_ZERO) && !(flags & F_MINUS))
+	if ((flgs & F_ZERO) && !(flgs & F_MINUS))
 		padding = '0';
 	if (negative)
 		extra_ch = '-';
-	else if (flags & F_PLUS)
+	else if (flgs & F_PLUS)
 		extra_ch = '+';
-	else if (flags & F_SPACE)
+	else if (flgs & F_SPACE)
 		extra_ch = ' ';
 
-	return (write_num_to_buffer(index, buf, flags, w, prec,
+	return (write_num_to_buffer(index, buf, flgs, w, prec,
 				    length, padding, extra_ch));
 }
