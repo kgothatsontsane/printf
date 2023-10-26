@@ -9,7 +9,7 @@
  * @w: Width specifier.
  * @prec: Precision specifier
  * @len: The length of the number.
- * @pading: Padding character.
+ * @padding: Padding character.
  * @extrac: Extra character to include, if any.
  *
  * Return: Writes a number using a character buffer with specified formatting.

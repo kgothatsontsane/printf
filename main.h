@@ -20,9 +20,9 @@
 #define S_SHORT 1
 
 /**
- * struct fmt - Struct op
+ * struct fmt - Struct operator
  *
- * @fmt: The format.
+ * @format: The format data member.
  * @fn: The function associated.
  */
 struct fmt
@@ -32,17 +32,16 @@ struct fmt
 };
 
 /**
- * typedef struct fmt fmt_t - Struct op
- *
- * @fmt: The format.
- * @fm_t: The function associated.
+ * typedef struct fmt fmt_t - Struct operator
+ * @fmt: The format struct
+ * @fm_t: The format type.
  */
 typedef struct fmt fmt_t;
 
 int _printf(const char *format, ...);
 void print_to_buffer(char buffer[], int *buffer_index);
 int print_handler(const char *format, int *index, va_list a_list, char buf[],
-		 int flgs, int wd, int prec, int sz);
+		  int flgs, int wd, int prec, int sz);
 
 /* print chars and strings */
 int print_char(va_list arguments, char output_buffer[],
@@ -69,8 +68,9 @@ int print_unsigned(va_list arguments, char output_buffer[], int format_flags,
 int print_octal(va_list arguments, char output_buffer[], int format_flags,
 		int output_width, int precision_spec, int spec_size);
 
-int print_hexadecimal(va_list arguments, char output_buffer[], int format_flags,
-		      int output_width, int precision_spec, int spec_size);
+int print_hexadecimal(va_list arguments, char output_buffer[],
+		      int format_flags, int output_width,
+		      int precision_spec, int spec_size);
 
 int print_hex_upper(va_list arguments, char output_buffer[], int format_flags,
 		     int output_width, int precision_spec, int spec_size);
@@ -93,8 +93,9 @@ int print_reverse(va_list arguments, char output_buffer[], int format_flags,
 		  int output_width, int precision_spec, int spec_size);
 
 /* print a string in rot 13*/
-int print_rot13string(va_list arguments, char output_buffer[], int format_flags,
-		      int output_width, int precision_spec, int spec_size);
+int print_rot13string(va_list arguments, char output_buffer[],
+		      int format_flags, int output_width,
+		      int precision_spec, int spec_size);
 
 /* specifier handlers */
 int retrieve_flags(const char *formatted_string, int *index);
@@ -108,7 +109,7 @@ int write_char_to_buffer(char c, char buffer[], int flags,
 		      int w, int prec, int sz);
 
 int write_number_to_buffer(int negative, int index, char buf[],
-		 int flags, int w, int prec, int sz);
+		 int flgs, int w, int prec, int sz);
 
 int write_num_to_buffer(int index, char buf[], int flgs, int w, int prec,
 	      int len, char padding, char extrac);
@@ -127,7 +128,7 @@ int digit(char);
 int printable(char);
 
 /* cast converters*/
-long int cast_size_number(long int number, int cast_size);
-long int cast_size_unsigned(unsigned long int number, int cast_size);
+long int cast_size_number(long int number, int c_size);
+unsigned long int cast_size_unsigned(unsigned long int number, int c_size);
 
 #endif /* MAIN_H */

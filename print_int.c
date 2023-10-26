@@ -40,6 +40,6 @@ int print_int(va_list arguments, char output_buffer[], int format_flags,
 	index++;
 
 	return (write_number_to_buffer
-		(negative, index, output_buffer,format_flags,
+		(negative, index, output_buffer, format_flags,
 		 output_width, precision_spec, size_spec));
 }

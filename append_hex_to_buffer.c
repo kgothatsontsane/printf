@@ -24,5 +24,5 @@ int append_hex_to_buffer(char ascii, char buff[], int index)
 	buff[index++] = map[ascii / 16];
 	buff[index] = map[ascii % 16];
 
-        return (3);
+	return (3);
 }

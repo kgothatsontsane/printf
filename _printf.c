@@ -7,8 +7,8 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, total = 0, count = 0;
-	int flags, width, precision, size, buffer_index = 0;
+	int i, total = 0, count = 0, buffer_index = 0;
+	int flags, width, precision, size;
 	va_list a_list;
 	char buffer[BUFF_SIZE];
 
@@ -42,10 +42,7 @@ int _printf(const char *format, ...)
 			count += total;
 		}
 	}
-
 	print_to_buffer(buffer, &buffer_index);
-
 	va_end(a_list);
-
 	return (count);
 }

@@ -3,15 +3,15 @@
 /**
  * cast_size_unsigned - casts an unsigned int to the required size
  * @number: unsigned integer to be casted
- * @cast_size: the size the number should  be casted to
+ * @c_size: the size the number should  be casted to
  *
  * Return: the casted value of number
  */
-long int cast_size_unsigned(unsigned long int number, int size)
+unsigned long int cast_size_unsigned(unsigned long int number, int c_size)
 {
-	if (size == S_LONG)
+	if (c_size == S_LONG)
 		return (number);
-	else if (size == S_SHORT)
+	else if (c_size == S_SHORT)
 		return ((unsigned short)number);
 
 	return ((unsigned int)number);

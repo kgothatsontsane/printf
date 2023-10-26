@@ -10,8 +10,9 @@
  * @size_spec: Specification for size.
  * Return: The count of characters transformed
  */
-int print_rot13string(va_list arguments, char output_buffer[], int format_flags,
-		      int output_width, int precision_spec, int size_spec)
+int print_rot13string(va_list arguments, char output_buffer[],
+		      int format_flags, int output_width,
+		      int precision_spec, int size_spec)
 {
 	char rot_char;
 	char *string;

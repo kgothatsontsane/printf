@@ -3,7 +3,7 @@
 /**
  * write_number_to_buffer - Prints a numeric value with specified formatting
  * @negative: Flag indicating if the value is negative.
- * @ind: Index at which the numeric value starts in the buffer.
+ * @index: Index at which the numeric value starts in the buffer.
  * @buf: Array of characters to store the numeric value and formatting.
  * @flgs: Flags specifying formatting.
  * @w: Width specifier.
@@ -13,7 +13,7 @@
  * Return: Number of chars printed.
  */
 int write_number_to_buffer(int negative, int index, char buf[],
-			   int flags, int w, int prec, int sz)
+			   int flgs, int w, int prec, int sz)
 {
 	int length = BUFF_SIZE - index - 1;
 	char padding = ' ', extra_ch = 0;
